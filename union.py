@@ -84,12 +84,9 @@ def draw_board():
             elif board.piece[row][col] == 'fn' and row == 7:
                 board.piece[row][col] = 'rn'
             for move in moves:
-                #pygame.draw.rect(screen, (255, 255, 0),pygame.Rect(move[0], move[1], 80, 80))
-                #pygame.draw.rect(screen, (255, 255, 0),pygame.Rect(move[1], move[0], 80, 80))
                 rect = pygame.Rect(move[1]*80, move[0]*80, 80, 80)
                 pygame.draw.rect(screen, (255, 255, 0), rect)
-                #screen.blit(pos, (move[1]*80+5, move[0]*80+5))
-            
+               
     
 
 
@@ -325,7 +322,7 @@ def get_posi():
         else:
             move_piece(first_move[0], first_move[1], row2, col2, muertox, muertoy)
         moves.clear()
-        print("tipo moves  ",moves)
+        
         mato = False
         muertoy, muertox = 0,0
 
@@ -338,8 +335,7 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 valid_turns()
-                for move in moves:
-                    print(move[0]," ",move[1] )
+                
 
     draw_board()
       
