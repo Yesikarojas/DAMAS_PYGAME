@@ -1,6 +1,5 @@
 import pygame
 import sys
-
 import order1
 
 pygame.init()
@@ -17,6 +16,8 @@ white_piece = pygame.image.load('fb.png')
 black_piece = pygame.image.load('fn.png')
 queen_black = pygame.image.load('rb.png')
 queen_white = pygame.image.load('rn.png')
+pos = pygame.image.load('pos.png')
+
 
 white_captured=0
 black_captured=0
@@ -50,6 +51,10 @@ muertox =0
 muertoy =0
 
 
+aux = 0
+aux1 = 0
+aux2 = 0
+aux3 = 0
 
 
 def draw_board():
@@ -78,6 +83,14 @@ def draw_board():
                 board.piece[row][col] = 'rb'
             elif board.piece[row][col] == 'fn' and row == 7:
                 board.piece[row][col] = 'rn'
+            for move in moves:
+                #pygame.draw.rect(screen, (255, 255, 0),pygame.Rect(move[0], move[1], 80, 80))
+                #pygame.draw.rect(screen, (255, 255, 0),pygame.Rect(move[1], move[0], 80, 80))
+                rect = pygame.Rect(move[1]*80, move[0]*80, 80, 80)
+                pygame.draw.rect(screen, (255, 255, 0), rect)
+                #screen.blit(pos, (move[1]*80+5, move[0]*80+5))
+            
+    
 
 
     white_captured_text = font.render('Pieces White: {}'.format(white_captured), True, (255, 255, 255))
@@ -291,7 +304,7 @@ def get_posi():
                     if board.piece[row+1][col-1] == "--":
                         moves.append([row+1, col-1, 0])
         for move in moves:
-            print(move[0],move[1], "psibles movimientos")
+            print(move[0],move[1], "posibles movimientos")
             
             pygame.draw.rect(screen, (29, 165, 172),
                                  pygame.Rect(move[1]*80, move[0]*80, 80, 80))
@@ -312,6 +325,7 @@ def get_posi():
         else:
             move_piece(first_move[0], first_move[1], row2, col2, muertox, muertoy)
         moves.clear()
+        print("tipo moves  ",moves)
         mato = False
         muertoy, muertox = 0,0
 
@@ -324,6 +338,8 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 valid_turns()
+                for move in moves:
+                    print(move[0]," ",move[1] )
 
     draw_board()
       
